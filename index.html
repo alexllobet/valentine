@@ -24,30 +24,31 @@
       <!-- "Click me" hint (hidden until success) -->
       <span id="click-hint" class="click-hint">Clícame! 👇</span>
 
-      <!-- Wooden sign (SVG overlay at bottom of duck) -->
-      <svg class="wooden-sign" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg"
-           role="img" aria-label="Wooden sign">
-        <!-- Rope from top -->
-        <line x1="80" y1="0" x2="80" y2="18" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
-        <line x1="220" y1="0" x2="220" y2="18" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
-        <!-- Sign board -->
-        <rect x="30" y="14" width="240" height="70" rx="6"
-              fill="#DEB887" stroke="#8B6914" stroke-width="2"/>
-        <!-- Wood grain lines -->
-        <path d="M45,32 Q150,28 255,32" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.4"/>
-        <path d="M45,48 Q150,51 255,48" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.35"/>
-        <path d="M45,62 Q150,59 255,62" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.28"/>
-        <path d="M45,74 Q150,72 255,74" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.22"/>
-        <!-- Nails -->
-        <circle cx="80" cy="22" r="3.5" fill="#aaa" stroke="#888" stroke-width="0.5"/>
-        <circle cx="220" cy="22" r="3.5" fill="#aaa" stroke="#888" stroke-width="0.5"/>
-        <!-- Sign text -->
-        <text id="sign-text" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
-              fill="#4E2F1E" font-weight="bold">
-          <tspan x="150" y="44" font-size="16">Would you 🐝</tspan>
-          <tspan x="150" y="66" font-size="16">my Valentine?</tspan>
-        </text>
-      </svg>
+      <!-- Wooden sign -->
+      <div class="sign-container">
+        <svg class="wooden-sign" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg"
+             role="img" aria-label="Wooden sign">
+          <!-- Rope from top -->
+          <line x1="80" y1="0" x2="80" y2="18" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="220" y1="0" x2="220" y2="18" stroke="#8B7355" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Sign board -->
+          <rect x="30" y="14" width="240" height="70" rx="6"
+                fill="#DEB887" stroke="#8B6914" stroke-width="2"/>
+          <!-- Wood grain lines -->
+          <path d="M45,32 Q150,28 255,32" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.4"/>
+          <path d="M45,48 Q150,51 255,48" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.35"/>
+          <path d="M45,62 Q150,59 255,62" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.28"/>
+          <path d="M45,74 Q150,72 255,74" stroke="#C4A265" stroke-width="1" fill="none" opacity="0.22"/>
+          <!-- Nails -->
+          <circle cx="80" cy="22" r="3.5" fill="#aaa" stroke="#888" stroke-width="0.5"/>
+          <circle cx="220" cy="22" r="3.5" fill="#aaa" stroke="#888" stroke-width="0.5"/>
+        </svg>
+        <!-- HTML text overlay (so emojis render correctly) -->
+        <div id="sign-text" class="sign-text">
+          <span>Would you 🐝</span>
+          <span>my Valentine?</span>
+        </div>
+      </div>
     </div>
 
     <!-- Anger caption -->
