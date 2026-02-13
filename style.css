@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Valentine Duck — Stylesheet
+   ========================================================================== */
+
+/* -- Custom Properties -- */
+:root {
+  --pink-light: #fce4ec;
+  --pink-mid: #f8bbd0;
+  --pink-dark: #e91e63;
+  --purple-light: #f3e5f5;
+  --text-dark: #4a1942;
+  --btn-no-bg: #607d8b;
+  --btn-no-hover: #546e7a;
+  --focus-color: #4a1942;
+}
+
+/* -- Reset & Base -- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, var(--pink-light), var(--pink-mid), var(--purple-light));
+  background-size: 400% 400%;
+  animation: gradient-shift 12s ease infinite;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* -- Animated Background -- */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* -- Layout -- */
+.scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  position: relative;
+}
+
+/* -- Headline (hidden until success) -- */
+.headline {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: var(--pink-dark);
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transform: scale(0.3);
+  transition: none;
+  pointer-events: none;
+  margin-bottom: 0.5rem;
+}
+
+.headline.visible {
+  animation: celebrate 0.6s ease-out forwards;
+}
+
+@keyframes celebrate {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-5deg); }
+  50%  { opacity: 1; transform: scale(1.15) rotate(3deg); }
+  70%  { transform: scale(0.95) rotate(-1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* -- Duck Wrapper (image + sign composition) -- */
+.duck-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* -- Duck Image -- */
+.duck-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* Smooth crossfade when swapping images */
+  transition: opacity 0.25s ease;
+}
+
+.duck-img.shake {
+  animation: img-shake 0.4s ease-in-out;
+}
+
+@keyframes img-shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20%      { transform: translateX(-6px) rotate(-2deg); }
+  40%      { transform: translateX(6px) rotate(2deg); }
+  60%      { transform: translateX(-4px) rotate(-1deg); }
+  80%      { transform: translateX(4px) rotate(1deg); }
+}
+
+/* -- Wooden Sign SVG -- */
+.wooden-sign {
+  width: 80%;
+  max-width: 250px;
+  height: auto;
+  margin-top: -10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* -- Anger Caption -- */
+.anger-caption {
+  font-size: 1.25rem;
+  font-weight: 700;
+  min-height: 1.8em;
+  margin-top: 0.5rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+/* -- Button Container -- */
+.button-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* -- Shared Button Styles -- */
+.btn {
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.75rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 3px;
+}
+
+/* -- Yes Button -- */
+.btn-yes {
+  background: var(--pink-dark);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(233, 30, 99, 0.35);
+}
+
+.btn-yes:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.45);
+}
+
+.btn-yes:active {
+  transform: scale(0.97);
+}
+
+/* -- No Button -- */
+.btn-no {
+  background: var(--btn-no-bg);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: top 0.3s ease-out, left 0.3s ease-out, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-no:hover {
+  background: var(--btn-no-hover);
+}
+
+.btn-no.escaping {
+  position: fixed;
+  z-index: 1000;
+}
+
+.btn-no.hidden {
+  display: none;
+}
+
+/* -- Confetti Canvas -- */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* -- Floating Hearts -- */
+.floating-heart {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* duration and sway set inline by JS for variety */
+  animation: float-heart var(--heart-duration, 6s) ease-in forwards;
+}
+
+@keyframes float-heart {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(0.4) rotate(0deg);
+  }
+  10% {
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-30vh) translateX(var(--heart-sway, 20px)) scale(0.7) rotate(10deg);
+  }
+  60% {
+    transform: translateY(-60vh) translateX(calc(var(--heart-sway, 20px) * -0.6)) scale(0.9) rotate(-8deg);
+  }
+  90% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-105vh) translateX(var(--heart-sway, 20px)) scale(1) rotate(15deg);
+  }
+}
+
+/* -- Fall to Bottom Animation (level 8 meltdown) -- */
+/* --fall-distance is set by JS per element so they land at viewport bottom */
+.fall {
+  animation: fall-down 1.2s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+  pointer-events: none;
+}
+
+@keyframes fall-down {
+  0%   { transform: translateY(0) rotate(0deg); }
+  70%  { transform: translateY(var(--fall-distance)) rotate(10deg); }
+  85%  { transform: translateY(calc(var(--fall-distance) - 20px)) rotate(6deg); }
+  100% { transform: translateY(var(--fall-distance)) rotate(8deg); }
+}
+
+/* No button: fixed-positioned, so fall via top property */
+.btn-no.fall {
+  animation: fall-down-fixed 1.2s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes fall-down-fixed {
+  0%   { transform: rotate(0deg); }
+  70%  { top: var(--fall-top) !important; transform: rotate(18deg); }
+  85%  { top: calc(var(--fall-top) - 15px) !important; transform: rotate(12deg); }
+  100% { top: var(--fall-top) !important; transform: rotate(15deg); }
+}
+
+/* Yes button emphasis after meltdown (stays in flow, just bigger) */
+.btn-yes.solo {
+  display: block;
+  margin: 1.25rem auto 0;
+  transform: scale(1.25);
+  box-shadow: 0 8px 30px rgba(233, 30, 99, 0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.btn-yes.solo:hover {
+  transform: scale(1.35);
+}
+
+/* Duck image clickable in success state */
+.duck-img.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.duck-img.clickable:hover {
+  transform: scale(1.03);
+}
+
+/* "Click me" hint */
+.click-hint {
+  display: none;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--pink-dark);
+  margin-top: 0.35rem;
+  animation: hint-bounce 1.5s ease-in-out infinite;
+}
+
+.click-hint.visible {
+  display: block;
+}
+
+@keyframes hint-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* -- Screen Reader Only -- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -- Reduced Motion -- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body {
+    animation: none;
+  }
+
+  .btn-no.escaping {
+    transition: none;
+  }
+
+  .headline.visible {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* -- Responsive -- */
+@media (max-width: 480px) {
+  .duck-wrapper {
+    max-width: 260px;
+  }
+
+  .btn {
+    font-size: 1.1rem;
+    padding: 0.65rem 2rem;
+  }
+
+  .headline {
+    font-size: 2rem;
+  }
+}
