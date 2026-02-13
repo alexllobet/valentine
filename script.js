@@ -55,7 +55,7 @@
   const announcer    = $('sr-announcer');
   const clickHint    = $('click-hint');
   const duckWrapper  = document.querySelector('.duck-wrapper');
-  const signContainer = document.querySelector('.sign-container');
+  const woodenSign   = document.querySelector('.wooden-sign');
 
   const SAD_PHOTO  = 'images/sad_alex.jpeg';
   const REAL_PHOTO = 'images/happy_alex.jpeg';
@@ -173,10 +173,10 @@
       el.style.setProperty('--fall-distance', dist + 'px');
     }
 
-    setFallDistance(signContainer);
+    setFallDistance(woodenSign);
     setFallDistance(caption);
 
-    signContainer.classList.add('fall');
+    woodenSign.classList.add('fall');
     caption.classList.add('fall');
 
     // No button is fixed-positioned — set target top value
@@ -207,7 +207,7 @@
     // If meltdown happened, undo the solo button and restore scene
     if (btnYes.classList.contains('solo')) {
       btnYes.classList.remove('solo');
-      signContainer.classList.remove('fall');
+      woodenSign.classList.remove('fall');
       caption.classList.remove('fall');
     }
 
@@ -220,7 +220,9 @@
     duckImg.style.opacity = '1';
 
     // Update sign text
-    signText.innerHTML = '<span>Sempre! \u{1F495}</span>';
+    signText.innerHTML =
+      '<tspan x="150" y="44" font-size="18"></tspan>' +
+      '<tspan x="150" y="66" font-size="20">Sempre! \u{1F495}</tspan>';
 
     // Update caption
     caption.textContent = 'T\'estimo! \u{1F496}';
