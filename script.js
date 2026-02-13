@@ -221,8 +221,9 @@
 
     // Update sign text
     signText.innerHTML =
-      '<tspan x="150" y="44" font-size="18"></tspan>' +
-      '<tspan x="150" y="66" font-size="20">Sempre! \u{1F495}</tspan>';
+      '<tspan x="150" y="40" font-size="11">M\'agrada passar el</tspan>' +
+      '<tspan x="150" y="56" font-size="11">Sant Valent\u{00ED}</tspan>' +
+      '<tspan x="150" y="72" font-size="11">amb tu \u{1F496}</tspan>';
 
     // Update caption
     caption.textContent = 'T\'estimo! \u{1F496}';
@@ -349,8 +350,8 @@
 
     heart.addEventListener('animationend', () => heart.remove());
 
-    // Schedule next heart with random delay (1–4s)
-    heartTimeout = setTimeout(spawnHeart, 1000 + Math.random() * 3000);
+    // Schedule next heart with random delay (0.5–1.5s)
+    heartTimeout = setTimeout(spawnHeart, 500 + Math.random() * 1000);
   }
 
   function startFloatingHearts() {
