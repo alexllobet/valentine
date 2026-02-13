@@ -25,12 +25,12 @@
     '',                    // 0: success (unused here)
     '',                    // 1: default — no caption
     'Hmm... \u{1F928}',   // 2: neutral
-    'Hey! \u{1F620}',     // 3: little annoyed
-    'Stop that! \u{1F621}', // 4: more annoyed
-    'I said STOP! \u{1F624}', // 5: even more
-    'SERIOUSLY?! \u{1F92C}',  // 6: steaming
-    'CLICK YES!! \u{1F4A2}',  // 7: very angry
-    'JUST. CLICK. YES. \u{1F621}\u{1F4A2}\u{1F621}' // 8: gif level
+    'Eiiii \u{1F620}',    // 3: little annoyed
+    'Eso no me gusta! \u{1F621}', // 4: more annoyed
+    'Eres mala! \u{1F624}', // 5: even more
+    'Yo soy un pato y tu una miiga de pan \u{1F92C}',  // 6: steaming
+    'TE PEGAR\u{00C9} UN BOCADO!! \u{1F4A2}',  // 7: very angry
+    'Un bocado gigaaante. \u{1F621}\u{1F4A2}\u{1F621}' // 8: gif level
   ];
 
   /* ── State ────────────────────────────────────────────────────────────── */
@@ -57,6 +57,7 @@
   const duckWrapper  = document.querySelector('.duck-wrapper');
   const woodenSign   = document.querySelector('.wooden-sign');
 
+  const SAD_PHOTO  = 'images/sad_alex.jpeg';
   const REAL_PHOTO = 'images/happy_alex.jpeg';
 
   /* ── Preload all images ───────────────────────────────────────────────── */
@@ -64,8 +65,9 @@
     const img = new Image();
     img.src = src;
   });
-  // Also preload the real photo for success crossfade
+  // Preload both photos
   { const img = new Image(); img.src = REAL_PHOTO; }
+  { const img = new Image(); img.src = SAD_PHOTO; }
 
   /* ── setDuckMood(imageIndex) ──────────────────────────────────────────── */
   function setDuckMood(imageIndex) {
@@ -150,16 +152,15 @@
     btnNo.style.top = newY + 'px';
 
     // Screen reader announcement
-    announce('The No button escaped! The duck is getting ' +
-      (newMoodIndex <= 3 ? 'annoyed' : 'angry') + '.');
+    announce('El bot\u{00F3}n no ya no est\u{00E1} disponible! Patito triste.');
   }
 
   /* ── triggerMeltdown() — everything falls except image + Yes button ─── */
   const btnContainer = document.querySelector('.button-container');
 
   function triggerMeltdown() {
-    // Swap gif to the real photo
-    duckImg.src = REAL_PHOTO;
+    // Swap gif to the sad photo
+    duckImg.src = SAD_PHOTO;
     duckImg.classList.remove('shake');
 
     const vh = window.innerHeight;
@@ -221,10 +222,10 @@
     // Update sign text
     signText.innerHTML =
       '<tspan x="150" y="44" font-size="18"></tspan>' +
-      '<tspan x="150" y="66" font-size="20">Yes! \u{1F495}</tspan>';
+      '<tspan x="150" y="66" font-size="20">Sempre! \u{1F495}</tspan>';
 
     // Update caption
-    caption.textContent = 'I love you! \u{1F496}';
+    caption.textContent = 'T\'estimo! \u{1F496}';
     caption.style.color = 'var(--pink-dark)';
 
     // Hide No button
@@ -238,7 +239,7 @@
     launchConfetti();
 
     // Announce to screen reader
-    announce('Yaaay! The duck is so happy! You said yes!');
+    announce('M\'agrada passar el Sant Valent\u{00ED} amb tu \u{1F496}');
 
     // Make image clickable to toggle between duck and real photo
     duckImg.classList.add('clickable');
